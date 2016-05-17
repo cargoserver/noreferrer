@@ -63,7 +63,8 @@ do ->
 
       body = "<html><head><meta http-equiv='Refresh' content='0; URL=#{$('<p/>').text(href).html()}' /></head><body></body></html>"
 
-      if $.browser.msie
+      # IE <= 11, the current jquery mainline version will not support IE11 with $.browser
+      if $.browser.msie || !!navigator.userAgent.match(/Trident.*rv\:11\./)
         $(a).click (ev) ->
           switch target = @target || '_self'
             when '_self', window.name
